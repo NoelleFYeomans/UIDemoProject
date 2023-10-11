@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 // Sam Robichaud 2022
 // NSCC-Truro
@@ -16,12 +18,17 @@ public class FirstPersonController_Sam : MonoBehaviour
     #region Settings
 
     [Header("Functional Settings")]
+    [SerializeField] private int health = 100; //need to display this
+
+
+    [Header("Functional Settings")]
     [SerializeField] private bool canRun = true;
     [SerializeField] private bool canJump = true;
     [SerializeField] private bool canCrouch = true;
     [SerializeField] private bool canUseHeadbob = true;
     [SerializeField] private bool canSlideOnSlopes = true;
     [SerializeField] private bool canZoom = true;
+    [SerializeField] public bool canCameraMove = true;
   
 
     [Header("Controls")]
@@ -71,8 +78,8 @@ public class FirstPersonController_Sam : MonoBehaviour
     private float defaultFOV;
     private Coroutine zoomRoutine;
 
- 
-  
+    public GameObject blood;
+    private RawImage _blood;
 
     // Sliding Settings
     private Vector3 hitPointNormal;
@@ -105,6 +112,7 @@ public class FirstPersonController_Sam : MonoBehaviour
 
     private Camera playerCamera;
     private CharacterController characterController;
+    private ScreenshakeScript shake;
 
     private Vector3 moveDirection;
     private Vector2 currentInput;
@@ -115,20 +123,30 @@ public class FirstPersonController_Sam : MonoBehaviour
     {
         playerCamera = GetComponentInChildren<Camera>();
         characterController = GetComponent<CharacterController>();
+
+        shake = gameObject.GetComponent<ScreenshakeScript>();
+        _blood = blood.GetComponent<RawImage>();
+        _blood.CrossFadeAlpha(0, 0, false);
+
         defaultYPos = playerCamera.transform.localPosition.y;
-        defaultFOV = playerCamera.fieldOfView;        
+        defaultFOV = playerCamera.fieldOfView;  
 
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
+
+
     }
 
     private void Update()
     {
+        if (health < 0) health = 0;
+        if (health <= 0) return; //die here
+
         if (canMove)
         {
             HandleMovementInput();
-            HandleMouseLook(); // look into moving into Lateupdate if motion is jittery
+            if (canCameraMove) HandleMouseLook(); // look into moving into Lateupdate if motion is jittery
 
             if (canJump)        { HandleJump();                                         }
             if (canCrouch)      { HandleCrouch();                                       }
@@ -137,6 +155,23 @@ public class FirstPersonController_Sam : MonoBehaviour
 
 
             ApplyFinalMovement();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            UnityEngine.Cursor.lockState = CursorLockMode.None;
+            canCameraMove = false;
+        }
+    }
+
+    public void takeDamage()
+    {
+        if (health > 0)
+        {
+            _blood.CrossFadeAlpha(1, 0, false);
+            health -= 10;
+            _blood.CrossFadeAlpha(0, 2, false); //this does make the blood fade out, just need to directly access the alpha now
+            shake.startShaking();
         }
     }
 

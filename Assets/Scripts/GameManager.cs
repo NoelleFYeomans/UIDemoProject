@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     private LevelManager _levelManager;
     private UI_Manager _UIManager;
 
+    private FirstPersonController_Sam fps_Sam;
+
     public enum GameState
     {
         TitleScreen,
@@ -49,6 +51,16 @@ public class GameManager : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
                 {
                     gameState = GameState.Pause;
+
+                    try
+                    {
+                        fps_Sam = GameObject.Find("Sam_FPS").GetComponent<FirstPersonController_Sam>();
+                        fps_Sam.canCameraMove = false;
+                    }
+                    catch
+                    {
+                        Debug.Log("no object to find");
+                    }
                 }
 
                 if (Input.GetKeyDown(KeyCode.F1))
@@ -93,6 +105,16 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         gameState = GameState.Gameplay;
+        Cursor.lockState = CursorLockMode.Locked;
+        try
+        {
+            fps_Sam = GameObject.Find("Sam_FPS").GetComponent<FirstPersonController_Sam>();
+            fps_Sam.canCameraMove = true;
+        }
+        catch
+        {
+            Debug.Log("no object to find");
+        }
         _UIManager.GameplayActive();
     }
 
