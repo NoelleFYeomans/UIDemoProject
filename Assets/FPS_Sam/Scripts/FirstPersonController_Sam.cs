@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -18,7 +19,7 @@ public class FirstPersonController_Sam : MonoBehaviour
     #region Settings
 
     [Header("Functional Settings")]
-    [SerializeField] private int health = 100; //need to display this
+    [SerializeField] public int health = 100; //need to display this
 
 
     [Header("Functional Settings")]
@@ -81,6 +82,8 @@ public class FirstPersonController_Sam : MonoBehaviour
     public GameObject blood;
     private RawImage _blood;
 
+    public Text edittable;
+
     // Sliding Settings
     private Vector3 hitPointNormal;
     private bool isSliding
@@ -135,6 +138,7 @@ public class FirstPersonController_Sam : MonoBehaviour
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         UnityEngine.Cursor.visible = false;
 
+        
 
     }
 

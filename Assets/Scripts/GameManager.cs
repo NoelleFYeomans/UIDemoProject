@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +13,10 @@ public class GameManager : MonoBehaviour
     private UI_Manager _UIManager;
 
     private FirstPersonController_Sam fps_Sam;
+
+    public GameObject edittable;
+    private TMP_Text editText;
+
 
     public enum GameState
     {
@@ -31,11 +37,15 @@ public class GameManager : MonoBehaviour
     {
        _UIManager = UIManager.GetComponent<UI_Manager>();
        _levelManager = LevelManager.GetComponent<LevelManager>();
+
+        editText = edittable.GetComponent<TextMeshProUGUI>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
         switch (gameState) //this is the gameManager itself essentially.
         {
             case GameState.TitleScreen:
@@ -56,6 +66,7 @@ public class GameManager : MonoBehaviour
                     {
                         fps_Sam = GameObject.Find("Sam_FPS").GetComponent<FirstPersonController_Sam>();
                         fps_Sam.canCameraMove = false;
+                        editText.text += "Healths: " + fps_Sam.health;
                     }
                     catch
                     {
