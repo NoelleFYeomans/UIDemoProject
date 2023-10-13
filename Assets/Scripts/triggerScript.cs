@@ -29,6 +29,8 @@ public class triggerScript : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        Debug.Log("got in");
+
         if (other.gameObject.activeSelf)
         {
             

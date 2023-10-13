@@ -48,5 +48,6 @@ public class ScreenshakeScript : MonoBehaviour
         }
 
         GameObject.Find("Sam_FPS").GetComponentInChildren<Camera>().transform.position = startPosition;
+        GameObject.Find("Sam_FPS").GetComponentInChildren<FirstPersonController_Sam>().canMove = true;
     }
 }

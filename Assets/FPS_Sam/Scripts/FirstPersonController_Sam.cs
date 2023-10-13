@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +12,7 @@ using UnityEngine.UIElements;
 
 public class FirstPersonController_Sam : MonoBehaviour
 {
-    public bool canMove { get; private set; } = true;
+    public bool canMove { get; set; } = true;
     private bool isRunning => canRun && Input.GetKey(runKey);
     private bool shouldJump => Input.GetKeyDown(jumpKey) && characterController.isGrounded;
     private bool shouldCrouch => Input.GetKeyDown(crouchKey) && !duringCrouchAnimation && characterController.isGrounded;
@@ -82,7 +83,7 @@ public class FirstPersonController_Sam : MonoBehaviour
     public GameObject blood;
     private RawImage _blood;
 
-    public Text edittable;
+    public GameObject edittable;
 
     // Sliding Settings
     private Vector3 hitPointNormal;
@@ -138,7 +139,7 @@ public class FirstPersonController_Sam : MonoBehaviour
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         UnityEngine.Cursor.visible = false;
 
-        
+        health = 100;
 
     }
 
@@ -172,6 +173,7 @@ public class FirstPersonController_Sam : MonoBehaviour
     {
         if (health > 0)
         {
+            canMove = false;
             _blood.CrossFadeAlpha(1, 0, false);
             health -= 10;
             _blood.CrossFadeAlpha(0, 2, false); //this does make the blood fade out, just need to directly access the alpha now
