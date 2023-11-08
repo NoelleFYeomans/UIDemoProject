@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     private FirstPersonController_Sam fps_Sam;
 
-    public GameObject edittable;
+    //public GameObject edittable;
     private TMP_Text editText;
 
 
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
        _UIManager = UIManager.GetComponent<UI_Manager>();
        _levelManager = LevelManager.GetComponent<LevelManager>();
 
-        editText = edittable.GetComponent<TextMeshProUGUI>();
+        //editText = edittable.GetComponent<TextMeshProUGUI>();
 
     }
 
