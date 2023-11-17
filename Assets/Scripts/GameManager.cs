@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
                     {
                         fps_Sam = GameObject.Find("Sam_FPS").GetComponent<FirstPersonController_Sam>();
                         fps_Sam.canCameraMove = false;
-                        editText.text += "Healths: " + fps_Sam.health;
+                        editText.text += "Health: " + fps_Sam.health;
                     }
                     catch
                     {

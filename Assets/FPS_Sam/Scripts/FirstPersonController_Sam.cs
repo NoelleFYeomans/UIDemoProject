@@ -178,6 +178,8 @@ public class FirstPersonController_Sam : MonoBehaviour
             health -= 10;
             _blood.CrossFadeAlpha(0, 2, false); //this does make the blood fade out, just need to directly access the alpha now
             shake.startShaking();
+            HealthManager.healthInstance.TakeDamage(10);
+            healthText.textInstance.setText(HealthManager.healthInstance.healthAmount);
         }
     }
 
