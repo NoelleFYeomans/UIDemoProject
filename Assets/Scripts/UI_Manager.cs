@@ -33,6 +33,8 @@ public class UI_Manager : MonoBehaviour
         WinUI.gameObject.SetActive(false);
         CreditsUI.gameObject.SetActive(false);
 
+        AudioListener.volume = 1;
+
         Cursor.visible = false;
     }
 
@@ -44,6 +46,8 @@ public class UI_Manager : MonoBehaviour
         GameOverUI.gameObject.SetActive(false);
         WinUI.gameObject.SetActive(false);
         CreditsUI.gameObject.SetActive(false);
+
+        AudioListener.volume = 0;
 
         Cursor.visible = true;
     }

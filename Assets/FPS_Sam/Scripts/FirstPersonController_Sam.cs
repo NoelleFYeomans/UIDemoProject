@@ -13,7 +13,7 @@ using UnityEngine.UIElements;
 public class FirstPersonController_Sam : MonoBehaviour
 {
     public bool canMove { get; set; } = true;
-    private bool isRunning => canRun && Input.GetKey(runKey);
+    private bool isRunning;
     private bool shouldJump => Input.GetKeyDown(jumpKey) && characterController.isGrounded;
     private bool shouldCrouch => Input.GetKeyDown(crouchKey) && !duringCrouchAnimation && characterController.isGrounded;
 
@@ -148,7 +148,34 @@ public class FirstPersonController_Sam : MonoBehaviour
         if (health < 0) health = 0;
         if (health <= 0) return; //die here
 
-        if (canMove)
+        if (canRun && Input.GetKey(runKey))
+        {
+            isRunning = true;
+        }
+        else
+        {
+            isRunning = false;
+        }
+
+        if (StaminaManager.stamInstance.stamAmount <= 0)
+        {
+            canRun = false;
+        }
+        else if (StaminaManager.stamInstance.stamAmount >= 1)
+        {
+            canRun = true;
+        }
+
+        if (isRunning)
+        {
+            StaminaManager.stamInstance.running = true;
+        }
+        else if (!isRunning)
+        {
+            StaminaManager.stamInstance.running = false;
+        }
+
+            if (canMove)
         {
             HandleMovementInput();
             if (canCameraMove) HandleMouseLook(); // look into moving into Lateupdate if motion is jittery
