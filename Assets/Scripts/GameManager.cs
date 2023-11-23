@@ -76,11 +76,33 @@ public class GameManager : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.F1))
                 {
+                    try
+                    {
+                        fps_Sam = GameObject.Find("Sam_FPS").GetComponent<FirstPersonController_Sam>();
+                    }
+                    catch
+                    {
+                        Debug.Log("no object to find");
+                        return;
+                    }
+                    Cursor.lockState = CursorLockMode.None;
+                    fps_Sam.canCameraMove = false;
                     gameState = GameState.Win;
                 }
 
                 if (Input.GetKeyDown(KeyCode.F2))
                 {
+                    try
+                    {
+                        fps_Sam = GameObject.Find("Sam_FPS").GetComponent<FirstPersonController_Sam>();
+                    }
+                    catch
+                    {
+                        Debug.Log("no object to find");
+                        return;
+                    }
+                    Cursor.lockState = CursorLockMode.None;
+                    fps_Sam.canCameraMove = false;
                     gameState = GameState.GameOver;
                 }
                 break;
