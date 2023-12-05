@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5123,6 +5123,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1867655913}
+        m_TargetAssemblyTypeName: UI_Manager, Assembly-CSharp
+        m_MethodName: CreditsTransitionIn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1600545250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6240,6 +6252,7 @@ GameObject:
   - component: {fileID: 1772713936}
   - component: {fileID: 1772713935}
   - component: {fileID: 1772713934}
+  - component: {fileID: 1772713937}
   m_Layer: 0
   m_Name: Canvas_Credits
   m_TagString: Untagged
@@ -6331,6 +6344,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!225 &1772713937
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772713932}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1786626216
 GameObject:
   m_ObjectHideFlags: 0
@@ -7041,6 +7066,8 @@ MonoBehaviour:
   titleTransform: {fileID: 2139221039}
   gameGroup: {fileID: 2122022103}
   gameTransform: {fileID: 2122022099}
+  creditsGroup: {fileID: 1772713937}
+  creditsTransform: {fileID: 1772713933}
 --- !u!1 &1900038951
 GameObject:
   m_ObjectHideFlags: 0

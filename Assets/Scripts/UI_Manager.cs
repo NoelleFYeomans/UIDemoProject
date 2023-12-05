@@ -25,7 +25,10 @@ public class UI_Manager : MonoBehaviour
     public CanvasGroup gameGroup;
     public RectTransform gameTransform;
 
-    //need gameplay fade in/out
+    public CanvasGroup creditsGroup;
+    public RectTransform creditsTransform;
+
+
 
     public void PauseFadeIn()
     {
@@ -34,7 +37,6 @@ public class UI_Manager : MonoBehaviour
         pauseTransform.DOAnchorPos(new Vector2(0f, 0f), fadeTime, false).SetEase(Ease.OutElastic);
         pauseGroup.DOFade(1, fadeTime);
     }
-
     public void PauseFadeOut()
     {
         pauseGroup.alpha = 1f;
@@ -42,7 +44,6 @@ public class UI_Manager : MonoBehaviour
         pauseTransform.DOAnchorPos(new Vector2(0f, -1000f), fadeTime, false).SetEase(Ease.InOutQuint);
         pauseGroup.DOFade(0, fadeTime).onComplete = GameplayActive;
     }
-
     public void TitleFadeIn()
     {
         titleGroup.alpha = 0f;
@@ -50,7 +51,6 @@ public class UI_Manager : MonoBehaviour
         titleTransform.DOAnchorPos(new Vector2(0f, 0f), fadeTime, false).SetEase(Ease.OutElastic);
         titleGroup.DOFade(1, fadeTimeTwo);
     }
-
     public void TitleFadeOut()
     {
         titleGroup.alpha = 1f;
@@ -65,13 +65,36 @@ public class UI_Manager : MonoBehaviour
         gameTransform.DOAnchorPos(new Vector2(0f, 0f), fadeTime, false).SetEase(Ease.OutElastic);
         gameGroup.DOFade(1, fadeTime);
     }
-
     public void GameFadeOut()
     {
         gameGroup.alpha = 1f;
         gameTransform.transform.localPosition = new Vector3(0f, 0f, 0f);
         gameTransform.DOAnchorPos(new Vector2(0f, -1000f), fadeTime, false).SetEase(Ease.InOutQuint);
         gameGroup.DOFade(0, fadeTime).onComplete = PauseActive;
+    }
+
+    public void CreditsTransitionIn()
+    {
+        creditsTransform.transform.DOMove(new Vector3(10, 0, 0), fadeTimeTwo).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+
+        creditsGroup.alpha = 0f;
+        //creditsTransform.transform.localScale = Vector3.zero;
+        creditsTransform.transform.localPosition = new Vector3(0f, -1000f, 0f);
+        creditsTransform.DOAnchorPos(new Vector2(0f, 0f), fadeTime, false).SetEase(Ease.OutElastic); //do the tween here
+        //creditsTransform.DOScale(1f, fadeTime).SetEase(Ease.OutBounce);
+        creditsGroup.DOFade(1, fadeTime);
+        creditsTransform.transform.DORotate(new Vector3(359, 359, 359), 2, RotateMode.Fast);
+        //StartCoroutine("Animation");
+    }
+
+    //IEnumerator Animation()
+    //{
+    //    creditsTransform.transform.DORotate(new Vector3(359, 359, 359), 2, RotateMode.Fast);
+    //}
+
+    public void CreditsTransitionOut()
+    {
+
     }
 
     public void TitleScreenActive()

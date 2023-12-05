@@ -129,9 +129,9 @@ public class GameManager : MonoBehaviour
                 _UIManager.WinActive();
                 break;
             case GameState.Credits:
-                Time.timeScale = 0f;
+                //Time.timeScale = 0f;
 
-                _UIManager.CreditsActive();
+                //_UIManager.CreditsActive();
                 break;
         }
     }
@@ -167,6 +167,7 @@ public class GameManager : MonoBehaviour
     public void CreditsButton()
     {
         gameState = GameState.Credits;
+        _UIManager.CreditsActive();
     }
 
     public void TitleButton()
