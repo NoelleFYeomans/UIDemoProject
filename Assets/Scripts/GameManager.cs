@@ -56,11 +56,13 @@ public class GameManager : MonoBehaviour
             case GameState.Gameplay:
                 Time.timeScale = 1f;
 
-                _UIManager.GameplayActive();
+                //_UIManager.GameplayActive();
 
                 if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
                 {
                     gameState = GameState.Pause;
+
+                    _UIManager.PauseActive(); //do something about this
 
                     try
                     {
@@ -107,9 +109,9 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.Pause:
-                Time.timeScale = 0f;
+                //Time.timeScale = 0f;
 
-                _UIManager.PauseActive();
+                //_UIManager.PauseActive(); //do something about this
 
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
@@ -148,7 +150,6 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("no object to find");
         }
-        _UIManager.GameplayActive();
     }
 
     public void LoadGameplay() 
