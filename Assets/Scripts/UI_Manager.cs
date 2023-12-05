@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,26 @@ public class UI_Manager : MonoBehaviour
     public Canvas GameOverUI;
     public Canvas WinUI;
     public Canvas CreditsUI;
+
+    public float fadeTime = 1;
+    public CanvasGroup pauseGroup;
+    public RectTransform pauseTransform;
+
+    public void FadeIn()
+    {
+        pauseGroup.alpha = 0f;
+        pauseTransform.transform.localPosition = new Vector3(0f, -1000f, 0f);
+        pauseTransform.DOAnchorPos(new Vector2(0f, 0f), fadeTime, false).SetEase(Ease.OutElastic);
+        pauseGroup.DOFade(1, fadeTime);
+    }
+
+    public void FadeOut()
+    {
+        pauseGroup.alpha = 1f;
+        pauseTransform.transform.localPosition = new Vector3(0f, 0f, 0f);
+        pauseTransform.DOAnchorPos(new Vector2(0f, -1000f), fadeTime, false).SetEase(Ease.InOutQuint);
+        pauseGroup.DOFade(0, fadeTime);
+    }
 
     public void TitleScreenActive()
     {
@@ -40,6 +61,8 @@ public class UI_Manager : MonoBehaviour
 
     public void PauseActive()
     {
+        FadeIn();
+
         TitleScreenUI.gameObject.SetActive(false);
         GameplayUI.gameObject.SetActive(false);
         PauseUI.gameObject.SetActive(true);

@@ -26,8 +26,8 @@ public class AudioManager : MonoBehaviour
 
     private void Update()
     {
-        GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<AudioSource>().volume = bgmSlider.value;
-        GameObject.FindGameObjectWithTag("SFXSource").gameObject.GetComponent<AudioSource>().volume = sfxSlider.value;
+        //GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<AudioSource>().volume = bgmSlider.value;
+        //GameObject.FindGameObjectWithTag("SFXSource").gameObject.GetComponent<AudioSource>().volume = sfxSlider.value;
     }
 
     public void ChangeBGMVolume()
